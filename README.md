@@ -1,14 +1,8 @@
 # ISRO-BAH-26-
 This project maps subsurface lunar ice using Chandrayaan-2 DFSAR radar polarimetry. It identifies safe landing zones near doubly shadowed craters and computes an optimal, power-constrained rover traverse to access these ancient volatile deposits.
-# ISRO’s BAH’26
 
-Start date: 03/24/2025
+Start date: 03/15/2025
 End date: 07/01/2026
-Start value: 0
-End value: 100
-Progress: 0%
-Priority: High
-Team: Account Management
 Status: In progress
 
 ### About project
