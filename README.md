@@ -63,6 +63,14 @@ lunar-psr-rover/
 
 ---
 
+## How to use
+run ```file.py```- Downloads and sets up the south pole from the data extracted from the LOLA DEM data
+then ```all_maps.py```- runs and maps out all LOLA DEM- parameters
+then ```ice_probability```- runs and maps out the ice probablity to account for ice in the path planning
+then ```cost_map.py```- creates a cost map for the user to see- stores the costs as a numpy array (.npy) 
+
+---
+
 ## Datasets
 
 | Dataset | Source | Purpose |
