@@ -34,8 +34,8 @@ R         = np.load(PROCESSED / "R.npy")
 print(f"Grid shape: {slope.shape}")
 
 # ── NORMALISE ────────────────────────────────────────────────────────
-slope_norm     = np.clip(slope     / SLOPE_NORM_MAX, 0, 1)
-roughness_norm = np.clip(roughness / ROUGH_NORM_MAX, 0, 1)
+slope_norm     = np.clip(slope     / SLOPE_NORM_MAX, -1, 1)
+roughness_norm = np.clip(roughness / ROUGH_NORM_MAX, -1, 1)
 
 # Placeholders — swap in real rasters when available
 
