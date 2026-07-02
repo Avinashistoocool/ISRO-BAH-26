@@ -31,56 +31,8 @@ This project addresses all five objectives in the problem statement:
 
 Two primary input streams merge at a **Fusion Layer**, then drive ice estimation, cost mapping,
 and path planning in sequence.
-
-```
-DFSAR data (L + S band) ──────────────────────────────────────────┐
-                                                                    ▼
-                                                          CPR / DOP Analysis
-                                                         (per band, separately)
-                                                                    │
-LOLA DEM ──► Data Loader (file.py) ──► DEM Features ──────────────►│
-                                    └──► PSR Generator ────────────►│
-                                                                    ▼
-                               OHRC Data ────────────────► ┌──────────────────────────┐
-                               Diviner Thermal ───────────► │      FUSION LAYER         │
-                                                            │  DEM geometry             │
-                                                            │  PSR constraints          │
-                                                            │  Radar ice likelihood     │
-                                                            └──────────────────────────┘
-                                                                    │
-                    ┌───────────────────────────────────────────────┤
-                    │                                               │
-                    ▼                                               ▼
-       Crater maps + Boulder ID                       Temperature Map
-                    │                                       +
-                    │                                Dielectric Assumptions
-                    │                                       │
-                    │                                       ▼
-                    │                            Probabilistic Ice Model
-                    │                                       │
-                    │                            ┌──────────┴──────────┐
-                    │                            ▼                      ▼
-                    │                 Ice Probability Map      Volume of Ice
-                    │                            │               Estimation
-                    │                     Visualise All Maps
-                    │                            │
-                    └────────────────────────────┤
-                                                 ▼
-                              constraints.json ──► COST MAP ◄── PSR Masks
-                                                         │
-                                                         ▼
-                                               A* + RL (PPO) Algorithms
-                                                         │
-                                          ┌──────────────┴──────────────┐
-                                          ▼                              ▼
-                                         Path                  Landing Site Estimation
-                                          │
-                                   Target Planner
-                                          │
-                          ┌───────────────┴───────────────┐
-                          ▼                               ▼
-                   Rover ◄──── OLTS ◄──── Orbiter    Simulation Validation
-```
+![Process Flow Diagram](Final_presentation/Screenshot 2026-07-02 121049.png)
+![Architecture Diagram](Final_presentation/Screenshot 2026-07-02 121101.png)
 
 ---
 
