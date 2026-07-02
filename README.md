@@ -29,10 +29,12 @@ This project addresses all five objectives in the problem statement:
 
 ## System Architecture
 
-Two primary input streams merge at a **Fusion Layer**, then drive ice estimation, cost mapping,
-and path planning in sequence.
-![Process Flow Diagram](Final_presentation/Screenshot 2026-07-02 121049.png)
-![Architecture Diagram](Final_presentation/Screenshot 2026-07-02 121101.png)
+
+Two primary input streams merge at a Fusion Layer, then drive ice estimation, cost mapping, and path planning in sequence.
+
+![Process Flow Diagram](Final_presentation/Screenshot%202026-07-02%20121049.png)
+
+![Architecture Diagram](Final_presentation/Screenshot%202026-07-02%20121101.png)
 
 ---
 
