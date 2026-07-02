@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="074a4855-8e29-4f30-aeaa-21d8b8997ebc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/ISRO-BAH-26.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/constraints.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/processed/R.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/processed/Theta.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/processed/aspect.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/processed/elevation.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/processed/roughness.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/processed/slope.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/download_and_clip.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/faustini_astar.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/outputs/cost_map.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/outputs/cost_map.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/outputs/obstacle_mask.npy" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/path_planner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/all_maps.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_maps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cost_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/cost_map.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file.py" beforeDir="false" afterPath="$PROJECT_DIR$/file.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cost_map.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Avinashistoocool&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Avinashistoocool/ISRO-BAH-26-.git&quot;,
+    &quot;accountId&quot;: &quot;3a328ff0-ee41-46b3-b17a-5cba0f491553&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3FgXqTSFgVJztOKLpwaXHpVmtNS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.all_maps.executor": "Run",
+    "Python.cost_map.executor": "Run",
+    "Python.diagnostic.executor": "Run",
+    "Python.download_and_clip.executor": "Run",
+    "Python.esha_said_2.executor": "Run",
+    "Python.faustini_astar.executor": "Run",
+    "Python.file.executor": "Run",
+    "Python.height_map.executor": "Run",
+    "Python.ice_loader.executor": "Run",
+    "Python.ice_model.executor": "Run",
+    "Python.ice_probablity.executor": "Run",
+    "Python.ice_volume.executor": "Run",
+    "Python.mask.executor": "Run",
+    "Python.path_planner.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/Avinash/PycharmProjects/ISRO-BAH-26",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "to.speed.mode.migration.done": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Avinash\PycharmProjects\ISRO-BAH-26" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Avinash\PycharmProjects\ISRO-BAH-26" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-ce6832f46686-7b97d883f26b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.25557.178" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="074a4855-8e29-4f30-aeaa-21d8b8997ebc" name="Changes" comment="" />
+      <created>1782497876335</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1782497876335</updated>
+    </task>
+    <servers />
+  </component>
+</project>

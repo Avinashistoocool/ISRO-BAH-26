@@ -1,0 +1,13 @@
+{
+  "pixel_size_m": 20.0,
+  "origin_x_m": 34560.0,
+  "origin_y_m": 39080.0,
+  "shape": [
+    3000,
+    3000
+  ],
+  "center_lat": -87.85,
+  "center_lon": 82.0,
+  "radius_m": 30000,
+  "projection_wkt": "PROJCRS[\"Moon (2015) - Sphere / Ocentric / South Polar\",BASEGEOGCRS[\"Moon (2015) - Sphere / Ocentric\",DATUM[\"Moon (2015) - Sphere\",ELLIPSOID[\"Moon (2015) - Sphere\",1737400,0,LENGTHUNIT[\"metre\",1]]],PRIMEM[\"Reference Meridian\",0,ANGLEUNIT[\"degree\",0.0174532925199433]],ID[\"IAU\",30100]],CONVERSION[\"unnamed\",METHOD[\"Polar Stereographic (variant B)\",ID[\"EPSG\",9829]],PARAMETER[\"Latitude of standard parallel\",-90,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8832]],PARAMETER[\"Longitude of origin\",0,ANGLEUNIT[\"degree\",0.0174532925199433],ID[\"EPSG\",8833]],PARAMETER[\"False easting\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8806]],PARAMETER[\"False northing\",0,LENGTHUNIT[\"metre\",1],ID[\"EPSG\",8807]]],CS[Cartesian,2],AXIS[\"easting\",north,ORDER[1],LENGTHUNIT[\"metre\",1]],AXIS[\"northing\",north,ORDER[2],LENGTHUNIT[\"metre\",1]],ID[\"IAU\",30135]]"
+}
