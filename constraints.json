@@ -1,0 +1,10 @@
+{
+  "max_slope_deg": 15,
+  "max_step_height_m": 0.3,
+  "speed_kmh": 0.1,
+  "operational_hours_per_day": 10,
+  "max_daily_traverse_km": 1.0,
+  "battery_range_km": [2, 4],
+  "psr_rim_distance_constraint_km": 3.0,
+  "min_charging_illumination_pct": 70
+}

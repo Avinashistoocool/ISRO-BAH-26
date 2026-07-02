@@ -1,0 +1,21 @@
+{
+  "dem_url": "/vsicurl/https://pgda.gsfc.nasa.gov/data/LOLA_20mpp/LDEM_80S_20MPP_ADJ.TIF",
+  "center": {
+    "lat": -87.23,
+    "lon": 85.22,
+    "label": "Faustini center"
+  },
+  "start": {
+    "lat": -87.68,
+    "lon": 77.30,
+    "label": "Faustini rim"
+  },
+  "goal": {
+    "lat": -87.85,
+    "lon": 82.00,
+    "label": "Faustini floor"
+  },
+  "radius_m": 30000.0,
+  "max_slope_deg": 20.0,
+  "output_png": "outputs/faustini_path.png"
+}
