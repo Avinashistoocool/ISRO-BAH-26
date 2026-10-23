@@ -32,9 +32,9 @@ This project addresses all five objectives in the problem statement:
 
 Two primary input streams merge at a Fusion Layer, then drive ice estimation, cost mapping, and path planning in sequence.
 
-![Process Flow Diagram](Final_presentation/Screenshot%202026-07-02%20121049.png)
+![Process Flow Diagram](Final_presentation/process_flow.png)
 
-![Architecture Diagram](Final_presentation/Screenshot%202026-07-02%20121101.png)
+![Architecture Diagram](Final_presentation/architecture.png)
 
 ---
 
@@ -54,7 +54,8 @@ ISRO-BAH-26/
 ├── constraints.json          # Rover physical + mission constraints
 ├── scripts/                  # Exploration: diagnostic.py (slope/roughness stats), height_map.py
 ├── tests/test_dfsar.py       # Synthetic tests for polarimetry + depth inversion
-├── Final_presentation/       # Pitch deck
+├── Final_presentation/       # Pitch deck + process_flow.png / architecture.png
+├── results/                  # Committed snapshot of model figures + volume JSON
 ├── data/raw/                 # DFSAR downloads (git-ignored)
 ├── data/processed/           # Layers warped to DEM grid (git-ignored, regenerate with ice_data.py)
 └── outputs/                  # Model outputs (git-ignored)
@@ -79,6 +80,12 @@ Large data (`*.npy`, `*.tif`, `outputs/`, `data/`) is not committed; regenerate 
 **Comparison with the previous heuristic model** (fixed weights, CPR > 1 threshold, no thermal gate):
 - The old model assigned P > 0.5 to ~3600 km²; 61% of that was in terrain with Tmax > 150 K, where ice cannot survive.
 - The new model puts 0% of its P > 0.5 area in warm terrain.
+
+![Ice probability evidence layers](results/ice_probability.png)
+
+![DFSAR L/S depth classes](results/ice_depth.png)
+
+Full numbers: [`results/ice_volume_estimate.json`](results/ice_volume_estimate.json).
 
 Ablation: PSR is the dominant term. Removing it cuts the high-probability area from 579 to 78 km². Mini-RF CPR adds about 30% to that area, and LAMP adds a little.
 

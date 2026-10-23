@@ -1,0 +1,77 @@
+{
+  "evidence_used": [
+    "cpr",
+    "lamp",
+    "psr",
+    "dfsar_depth"
+  ],
+  "cpr_roughness_fit_log_cpr=a+b*rough": [
+    -0.8952643775795652,
+    0.013210011185763626
+  ],
+  "dfsar_cpr_cold_minus_warm_z": -0.020285286009311676,
+  "mean_p_in_psr": 0.5248313546180725,
+  "mean_p_outside_psr": 0.06144697591662407,
+  "volume": {
+    "column_depth_m": 5.0,
+    "ice_table_depth_source": "diviner",
+    "ice_area_km2_p>0.5": 603.0432,
+    "expected_volume_m3_direct_0-3m": {
+      "f_ice=0.01": 21373057.28,
+      "f_ice=0.05": 106865286.4,
+      "f_ice=0.10": 213730572.8
+    },
+    "expected_volume_m3_extrapolated_3-5m": {
+      "f_ice=0.01": 14274859.52,
+      "f_ice=0.05": 71374297.60000001,
+      "f_ice=0.10": 142748595.20000002
+    },
+    "note": "Ice-table depth uses DFSAR L/S only when the depth signal passes the enrichment test; otherwise Diviner depth-to-stability. Below L-band sensing depth is extrapolated."
+  },
+  "dfsar_depth": {
+    "sigma_L": 0.02914828625987217,
+    "sigma_S": 0.11672160632429418,
+    "log_k": -1.0574672222137451,
+    "k": 0.347334418099815,
+    "n_calibration_px": 3484,
+    "k_calibrated": true,
+    "baseline_fit_L": [
+      3.6056059839158356,
+      6.320847898243547
+    ],
+    "baseline_fit_S": [
+      0.48208047058951126,
+      1.5726042508403504
+    ],
+    "delta_m": {
+      "S": 0.5,
+      "L": 1.5
+    },
+    "enrichment_cold_vs_warm": {
+      "near-surface (L+S)": {
+        "rate_warm": 0.0013986882199803093,
+        "rate_cold": 0.0016245089274612942,
+        "ratio": 1.1614517833603861
+      },
+      "deep (L only)": {
+        "rate_warm": 0.021486837965988246,
+        "rate_cold": 0.014191318640597885,
+        "ratio": 0.6604656610275313
+      },
+      "S only (inconsistent)": {
+        "rate_warm": 0.016596527330649716,
+        "rate_cold": 0.05890302232038577,
+        "ratio": 3.5491173030882393
+      }
+    },
+    "depth_signal_significant": false,
+    "s_band_source": "mini-rf",
+    "area_km2_by_class": {
+      "none": 2260.1112000000003,
+      "near-surface (L+S)": 3.9232,
+      "deep (L only)": 44.0332,
+      "S only (inconsistent)": 81.87
+    },
+    "median_depth_m_where_p>0.5": 1.5318748950958252
+  }
+}
