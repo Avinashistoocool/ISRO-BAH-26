@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE
+.idea/
+.idea_backup/
+.vscode/
+
+# Large / generated data (regenerate with download_and_clip.py, path_planner.py)
+*.npy
+*.tif
+outputs/
+data/raw/

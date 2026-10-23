@@ -1,8 +1,8 @@
-# Lunar PSR Rover — Chandrayaan-2 DFSAR Ice Detection & Traverse Design
+﻿# Lunar PSR Rover — Chandrayaan-2 DFSAR Ice Detection & Traverse Design
 
 **Hackathon:** ISRO Build-a-thon Hackathon 2026 — Chandrayaan-2 Lunar South Polar Exploration Challenge
 **Team:** <!-- FILL: your team name -->
-**Status:** In progress
+**Status:** In progress. The ice-distribution model and A* path planner are implemented; RL, simulation, and OHRC are planned.
 
 Maps subsurface lunar ice using Chandrayaan-2 DFSAR dual-frequency radar polarimetry,
 estimates subsurface ice volume, selects a safe landing site near a doubly shadowed crater
@@ -41,59 +41,56 @@ Two primary input streams merge at a Fusion Layer, then drive ice estimation, co
 ## Repository Structure
 
 ```
-lunar-psr-rover/
-├── data/
-│   ├── raw/                         # DFSAR, DEM, OHRC datasets (not committed)
-│   └── processed/                   # Reprojected and co-registered rasters
-│
-├── config/
-│   └── constraints.json             # Rover physical + mission constraints
-│
-├── notebooks/
-│   ├── 01_dem_preprocessing.ipynb   # DEM loading, PSR generation, terrain derivatives
-│   ├── 02_cpr_dop_analysis.ipynb    # DFSAR Stokes → CPR, DOP rasters (L and S band)
-│   ├── 03_fusion_layer.ipynb        # DEM + PSR + radar likelihood + OHRC fusion
-│   ├── 04_ice_detection.ipynb       # Probabilistic ice model, dual-band depth classification
-│   ├── 05_ice_volume.ipynb          # Dielectric mixing model, volume integration
-│   ├── 06_path_planning.ipynb       # Cost map, A*+RL path, landing site output
-│   └── 07_simulation.ipynb          # Rover ↔ OLTS ↔ Orbiter simulation validation
-│
-├── src/
-│   ├── file.py                      # Data loader — LOLA DEM setup and south pole extraction
-│   ├── all_maps.py                  # Visualise all raster layers (slope, roughness, PSR, CPR, DOP)
-│   ├── preprocess.py                # CRS reprojection and co-registration
-│   ├── psr_generator.py             # PSR boundary generation from DEM + illumination model
-│   ├── cpr_dop.py                   # CPR / DOP per band from DFSAR Stokes parameters
-│   ├── fusion.py                    # Fusion layer — DEM, PSR, radar, OHRC, thermal
-│   ├── ice_model.py                 # Dielectric mixing model + probabilistic ice detection
-│   ├── ice_probability.py           # Ice probability raster output
-│   ├── ice_volume.py                # Dual-band depth-bin volume estimation
-│   ├── crater_boulder.py            # Crater maps and boulder identification from OHRC
-│   ├── cost_map.py                  # Weighted traversability raster (.npy)
-│   ├── path_planner.py              # A* with PPO RL path planning
-│   ├── target_planner.py            # Multi-waypoint target sequencing
-│   ├── landing_site.py              # Landing site estimation from path output
-│   ├── simulation.py                # Rover ↔ OLTS ↔ Orbiter chain simulation
-│   └── metrics.py                   # Path evaluation and export utilities
-│
-├── outputs/
-│   ├── ice_probability_map.tif      # Ice detection output raster
-│   ├── ice_volume_estimate.json     # Volume estimate per depth bin (near-surface / deep)
-│   ├── landing_sites.geojson        # Ranked candidate landing sites (primary + contingencies)
-│   ├── rover_path.geojson           # Final optimised traverse path with waypoints
-│   └── figures/                     # Publication-quality maps and charts
-│
-├── requirements.txt
-└── README.md
+ISRO-BAH-26/
+├── download_and_clip.py      # LOLA 20 m DEM crop around Faustini -> lunar_south_pole_full.npy + _meta.json
+├── ice_data.py               # Streams/warps all evidence layers (PSR, Diviner, Mini-RF, LAMP, DFSAR) onto DEM grid
+├── dfsar.py                  # DFSAR polarimetry (CPR/DOP from SLC) + L/S dual-band depth-to-ice inversion
+├── ice_model.py              # Bayesian ice-probability fusion, depth maps, volume estimate
+├── cost_map.py               # Slope-based traversability cost map (backend)
+├── path_planner.py           # A* rover traverse (frontend, uses config.json)
+├── landing_site.py           # Landing-site suitability prototype (slope + illumination)
+├── all_maps.py               # Visualise DEM-derived layers
+├── config.json               # Start/goal/centre coordinates, DEM URL, slope limit
+├── constraints.json          # Rover physical + mission constraints
+├── scripts/                  # Exploration: diagnostic.py (slope/roughness stats), height_map.py
+├── tests/test_dfsar.py       # Synthetic tests for polarimetry + depth inversion
+├── Final_presentation/       # Pitch deck
+├── data/raw/                 # DFSAR downloads (git-ignored)
+├── data/processed/           # Layers warped to DEM grid (git-ignored, regenerate with ice_data.py)
+└── outputs/                  # Model outputs (git-ignored)
 ```
+
+Large data (`*.npy`, `*.tif`, `outputs/`, `data/`) is not committed; regenerate with the commands below.
+
+---
+
+## Current Results — Faustini, 60 × 60 km @ 20 m
+
+| Metric | Value |
+| --- | --- |
+| Mean P(ice) inside PSR / outside | 0.52 / 0.06 |
+| Area with P(ice) > 0.5 | ~603 km² |
+| Expected ice volume, 0–3 m (f_ice 1% / 5% / 10%) | 2.1 × 10⁷ / 1.0 × 10⁸ / 2.1 × 10⁸ m³ |
+| Expected ice volume, 3–5 m extrapolated | 1.4 × 10⁷ / 7.0 × 10⁷ / 1.4 × 10⁸ m³ |
+| Faustini PSR floor Tmax (Diviner) | median 86 K, 100% < 110 K |
+| DFSAR L-band CPR cold-vs-warm shift (SERD-corrected) | Δz = −0.02 (not fused) |
+| L/S depth signal significant | No → Diviner depth-to-stability used |
+
+**Comparison with the previous heuristic model** (fixed weights, CPR > 1 threshold, no thermal gate):
+- The old model assigned P > 0.5 to ~3600 km²; 61% of that was in terrain with Tmax > 150 K, where ice cannot survive.
+- The new model puts 0% of its P > 0.5 area in warm terrain.
+
+Ablation: PSR is the dominant term. Removing it cuts the high-probability area from 579 to 78 km². Mini-RF CPR adds about 30% to that area, and LAMP adds a little.
 
 ---
 
 ## How to Run
 
+### Full pipeline (planned)
+
 ```bash
 # 1. Load LOLA DEM and set up the south pole region
-python src/file.py
+python download_and_clip.py
 
 # 2. Visualise all DEM-derived parameter maps (slope, roughness, PSR boundary, aspect)
 python src/all_maps.py
