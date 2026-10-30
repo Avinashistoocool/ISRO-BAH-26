@@ -1,6 +1,8 @@
 site_name: ISRO-BAH-26
-site_description: Subsurface ice mapping and rover traverse planning at the lunar south pole with Chandrayaan-2 DFSAR
+site_description: "ISRO-BAH-26 by Avinash Chandra Gupta and Team Nakshatra: lunar south pole ice mapping with Chandrayaan-2 DFSAR and rover path planning."
 site_url: https://avinashistoocool.github.io/ISRO-BAH-26/
+site_author: Avinash Chandra Gupta
+copyright: \"&copy; 2026 Avinash Chandra Gupta (Avinash Gupta) &middot; <a href='https://avinashistoocool.github.io/'>avinashistoocool.github.io</a>\"
 repo_url: https://github.com/Avinashistoocool/ISRO-BAH-26
 repo_name: Avinashistoocool/ISRO-BAH-26
 edit_uri: edit/main/docs/
@@ -38,3 +40,18 @@ markdown_extensions:
   - toc: {permalink: true}
   - pymdownx.superfences
   - pymdownx.highlight
+
+extra:
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://avinashistoocool.github.io/
+      name: Avinash Chandra Gupta
+    - icon: fontawesome/brands/github
+      link: https://github.com/Avinashistoocool
+      name: Avinash Chandra Gupta on GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/avinashistoocool
+      name: Avinash Chandra Gupta on LinkedIn
+    - icon: fontawesome/brands/x-twitter
+      link: https://x.com/suprcoolavinash
+      name: Avinash Chandra Gupta on X
