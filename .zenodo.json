@@ -1,0 +1,46 @@
+{
+  "title": "ISRO-BAH-26: subsurface ice mapping and rover traverse planning at the lunar south pole with Chandrayaan-2 DFSAR",
+  "upload_type": "software",
+  "version": "1.0.0",
+  "publication_date": "2026-10-30",
+  "description": "<p>Code for detecting and characterising subsurface water ice at the lunar south pole and planning a rover traverse, built for the ISRO Bharatiya Antariksh Hackathon 2026. Over a 60 x 60 km window around Faustini crater on the LOLA 20 m DEM, it resamples LOLA PSR, Diviner maximum temperature and depth to ice stability, LRO Mini-RF S-band CPR, LAMP Lyman-alpha ratio and Chandrayaan-2 DFSAR L-band polarimetric mosaics onto one grid; fuses roughness-corrected radar anomalies, LAMP and PSR evidence in log-odds space gated by thermal stability, with Monte-Carlo weight uncertainty; inverts the L/S CPR excess ratio for depth to ice with an enrichment significance test; estimates expected ice volume in the top 5 m; and plans a slope-constrained rover path with 8-connected A*.</p><p>Documentation: <a href=\"https://avinashistoocool.github.io/ISRO-BAH-26/\">avinashistoocool.github.io/ISRO-BAH-26</a></p>",
+  "creators": [
+    {
+      "name": "Gupta, Avinash Chandra",
+      "affiliation": "IIT Delhi"
+    },
+    {
+      "name": "Bansal, Subodh",
+      "affiliation": "IIT Delhi"
+    },
+    {
+      "name": "Jain, Esha",
+      "affiliation": "IIT Delhi"
+    }
+  ],
+  "keywords": [
+    "Moon",
+    "lunar south pole",
+    "water ice",
+    "Chandrayaan-2",
+    "DFSAR",
+    "synthetic aperture radar",
+    "circular polarisation ratio",
+    "permanently shadowed regions",
+    "Faustini crater",
+    "rover path planning",
+    "A* search"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/Avinashistoocool/ISRO-BAH-26",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://avinashistoocool.github.io/ISRO-BAH-26/",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    }
+  ]
+}

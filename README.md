@@ -1,4 +1,4 @@
-﻿# Lunar PSR Rover — Chandrayaan-2 DFSAR Ice Detection & Traverse Design
+# Lunar PSR Rover — Chandrayaan-2 DFSAR Ice Detection & Traverse Design
 
 **Hackathon:** ISRO Build-a-thon Hackathon 2026 — Chandrayaan-2 Lunar South Polar Exploration Challenge
 **Team:** <!-- FILL: your team name -->
@@ -88,6 +88,15 @@ Large data (`*.npy`, `*.tif`, `outputs/`, `data/`) is not committed; regenerate 
 Full numbers: [`results/ice_volume_estimate.json`](results/ice_volume_estimate.json).
 
 Ablation: PSR is the dominant term. Removing it cuts the high-probability area from 579 to 78 km². Mini-RF CPR adds about 30% to that area, and LAMP adds a little.
+
+---
+
+## Documentation
+
+Browse everything at **[avinashistoocool.github.io/ISRO-BAH-26](https://avinashistoocool.github.io/ISRO-BAH-26/)**.
+
+- [**Technical report (PDF)**](docs/ISRO-BAH-26_Technical_Report.pdf): the architecture and all of the mathematics used in the code, including the polar stereographic grid, terrain roughness, compact/full-pol CPR and DOP, the roughness-corrected radar anomaly, thermal-stability gate, log-odds evidence fusion with Monte-Carlo weights, the L/S depth-to-ice inversion and enrichment test, the volume integral, the slope cost map and the A* planner, plus results and limitations. The LaTeX source is in [`docs/ISRO-BAH-26_Technical_Report.tex`](docs/ISRO-BAH-26_Technical_Report.tex).
+- [**Pitch deck (PDF)**](Final_presentation/Final_ISRO_pitch.pdf): the hackathon presentation.
 
 ---
 
@@ -480,6 +489,12 @@ defusedxml
 - LRO LOLA Science Team — Lunar topographic model, NASA PDS
 - Noda, H. et al. — Illumination conditions at lunar south polar regions
 - Chandrayaan-2 DFSAR instrument description — ISRO
+
+---
+
+## Citing
+
+If you use this work, please cite it using the metadata in [`CITATION.cff`](CITATION.cff) (GitHub shows a "Cite this repository" button). Zenodo metadata is in [`.zenodo.json`](.zenodo.json).
 
 ---
 
