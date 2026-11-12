@@ -1,5 +1,5 @@
 # ISRO-BAH-26-
-This project maps subsurface lunar ice using Chandrayaan-2 DFSAR radar polarimetry. It identifies safe landing zones near doubly shadowed craters and computes an optimal, power-constrained rover traverse to access these ancient volatile deposits.
+This project uses Chandrayaan-2 DFSAR radar polarimetry to map subsurface lunar ice. It finds safe landing zones near doubly shadowed craters. It also calculates an optimal rover traverse to these ancient volatile deposits, within the power limits.
 
 Start date: 03/15/2025
 End date: 07/01/2026
@@ -13,19 +13,19 @@ Status: In progress
 
 A hackathon project for the **ISRO Chandrayaan-2 Lunar South Polar Exploration Challenge**.
 
-Detects subsurface ice in permanently shadowed regions (PSRs) and computes a safe, energy-efficient rover traverse path from landing site to target crater.
+The project finds subsurface ice in permanently shadowed regions (PSRs). It calculates a safe, energy-efficient rover traverse path from the landing site to the target crater.
 
 ---
 
 ## Problem Statement
 
-The lunar South Pole hosts **doubly shadowed craters** — craters within PSRs — where temperatures drop to −230 °C and water ice may have accumulated over billions of years. Identifying these ice deposits and designing a rover path to access them is a core challenge for future ISRO lunar missions.
+The lunar South Pole has **doubly shadowed craters**. These are craters in PSRs. In these craters, temperatures decrease to −230 °C, and water ice can have collected over billions of years. Future ISRO lunar missions must find these ice deposits and design a rover path to them.
 
-This project:
+This project does these tasks:
 
-1. Maps subsurface ice using Chandrayaan-2 DFSAR radar polarimetry
-2. Selects a safe landing site near the doubly shadowed crater
-3. Computes an optimal rover traverse path with terrain and power constraints
+1. It maps subsurface ice with Chandrayaan-2 DFSAR radar polarimetry.
+2. It selects a safe landing site near the doubly shadowed crater.
+3. It calculates an optimal rover traverse path within the terrain and power limits.
 
 ---
 
@@ -74,7 +74,7 @@ lunar-psr-rover/
 | LRO Diviner thermal | NASA PDS | Temperature / illumination maps |
 | LRO LROC NAC | NASA PDS | Boulder distribution, surface texture |
 
-> Download instructions for public datasets: see `data/README.md`
+> For the download instructions of the public datasets, refer to `data/README.md`.
 > 
 
 ---
@@ -85,7 +85,7 @@ lunar-psr-rover/
 
 All datasets are reprojected to **Lunar South Polar Stereographic** and co-registered spatially.
 
-Terrain derivatives are computed from the LOLA DEM:
+The terrain derivatives come from the LOLA DEM:
 
 ```python
 import richdem as rd
@@ -97,7 +97,7 @@ roughness = rd.TerrainAttribute(dem, attrib='roughness')
 
 ### 2. Ice Detection
 
-Radar polarimetric parameters are computed from DFSAR Stokes matrix data.
+The radar polarimetric parameters are calculated from the DFSAR Stokes matrix data.
 
 **Circular Polarization Ratio (CPR)**
 
@@ -117,11 +117,11 @@ DOP = sqrt(Q² + U² + V²) / I
 ice_mask = (cpr > 1.0) & (dop < 0.13)
 ```
 
-Values above CPR 1.0 and below DOP 0.13 indicate volume scattering consistent with subsurface ice, as distinct from surface roughness effects.
+Values above CPR 1.0 and below DOP 0.13 show volume scattering that agrees with subsurface ice. This signature is different from the effects of surface roughness.
 
 ### 3. Landing Site Selection
 
-Candidate landing sites are scored on three criteria:
+The tool gives a score to each candidate landing site with three criteria:
 
 ```python
 score = (illumination_fraction * 0.4) \
@@ -140,9 +140,9 @@ Safety mask thresholds:
 
 ### 4. Path Planning
 
-The terrain is modeled as a **weighted grid graph** over the DEM raster.
+The model of the terrain is a **weighted grid graph** over the DEM raster.
 
-**Cost function per cell:**
+**Cost function for each cell:**
 
 ```python
 cost = (w1 * slope_cost
@@ -159,10 +159,10 @@ w1, w2, w3, w4, w5 = 0.35, 0.25, 0.20, 0.15, 0.05
 
 | Algorithm | Role |
 | --- | --- |
-| A* | Baseline — fast, optimal on grid |
-| D* Lite | Dynamic replanning as new terrain is revealed |
+| A* | Baseline — fast, optimal on a grid |
+| D* Lite | Dynamic replanning when the rover sees new terrain |
 | RRT* | Continuous-space, asymptotically optimal |
-| DQN (optional) | Reinforcement learning agent for innovation |
+| DQN (optional) | Reinforcement learning agent, as an innovation |
 
 **Rover physical constraints:**
 
@@ -303,19 +303,19 @@ IIT License — see `LICENSE` for details.
 `Hours 0–5`
 
 - [ ]  Download Chandrayaan-2 DFSAR data
-    - Provided by organizers — confirm file format (GeoTIFF / HDF5)
+    - The organizers supply the data — confirm the file format (GeoTIFF / HDF5)
 - [ ]  Download LOLA DEM (LRO)
     - NASA PDS — Lunar South Polar Stereographic projection
 - [ ]  Download LROC NAC / ShadowCam imagery
     - High-res surface texture and PSR floor imaging
 - [ ]  Download LRO Diviner thermal data
-    - Temperature maps and illumination fraction per pixel
+    - Temperature maps and the illumination fraction of each pixel
 - [ ]  Reproject all datasets to common CRS
     - Lunar South Polar Stereographic (EPSG:104903 or similar)
 - [ ]  Co-register OHRC + LOLA DEM spatially
-    - Use ground control points or image matching
+    - Use ground control points or image matches
 - [ ]  Compute slope, aspect & roughness from DEM
-    - Use richdem or GDAL — output as raster layers
+    - Use richdem or GDAL — the output is raster layers
 - [ ]  Generate illumination model
     - SPICE kernels or LRO Diviner thermal data for PSR boundary mapping
 
@@ -336,7 +336,7 @@ IIT License — see `LICENSE` for details.
 - [ ]  Identify doubly shadowed craters
     - Cross-check illumination model with OHRC imagery
 - [ ]  Validate with LOLA CPR cross-reference
-    - Sanity-check ice signatures against independent dataset
+    - Compare the ice signatures with an independent dataset
 
 ---
 
@@ -347,13 +347,13 @@ IIT License — see `LICENSE` for details.
 - [ ]  Build terrain safety mask
     - Slope < 5°, low roughness, no large boulders (from OHRC)
 - [ ]  Build illumination mask
-    - 70% of lunar day sunlit — confirms solar power viability
+    - Sunlight for 70% of the lunar day — this confirms that solar power is viable
 - [ ]  Buffer analysis around target crater
     - 5 km rover range constraint from landing ellipse
 - [ ]  Score and rank candidate landing sites
     - Score = illumination × proximity × terrain safety
 - [ ]  Select primary + 2 contingency sites
-    - Document rationale for each selection
+    - Record the reason for each selection
 
 ---
 
@@ -368,15 +368,15 @@ IIT License — see `LICENSE` for details.
 - [ ]  Implement A* baseline planner
     - Grid-based graph with custom heuristic — validate output path
 - [ ]  Implement D* Lite for dynamic replanning
-    - Handles terrain updates mid-traverse
+    - Updates the path when the terrain data changes during the traverse
 - [ ]  Implement RRT* for continuous-space comparison
-    - Asymptotically optimal, good for non-grid terrain
+    - Asymptotically optimal, applicable to terrain without a grid
 - [ ]  (Optional) RL agent — DQN or PPO
     - State: position + battery + illumination · Reward: ice − slope penalty − energy
 - [ ]  Run sensitivity analysis on cost weights
     - Pareto front: safety vs scientific value vs energy consumption
 - [ ]  Add waypoint charging stops on illuminated ridges
-    - Plan battery top-up points before PSR dip segments
+    - Plan battery charge points before the segments that go into the PSR
 - [ ]  Compute final path metrics
     - Length (km) · max slope · shadow time · ice zones visited · energy (Wh)
 
@@ -391,17 +391,17 @@ IIT License — see `LICENSE` for details.
 - [ ]  Animate rover traverse on 3D DEM
     - Python matplotlib / PyVista or MATLAB 3D surface plot
 - [ ]  Plot CPR / DOP rasters with ice probability overlays
-    - Show detection thresholds visually with color scale
+    - Show the detection thresholds with a color scale
 - [ ]  Estimate subsurface ice volume
     - Radar backscatter + dielectric model for top 5 m of regolith
 - [ ]  Write methodology documentation
-    - Datasets used, algorithms, parameters, results summary
+    - Datasets, algorithms, parameters, summary of the results
 - [ ]  Prepare final presentation slides
     - Cover: ice map · landing site · rover path · metrics · innovation angle
 
 ## Path optimisation:
 
-Think of the lunar surface as a giant chessboard.
+The model of the lunar surface is a large grid of cells, as on a chessboard.
 
 ```
 □ □ □ □ □
@@ -410,7 +410,7 @@ Think of the lunar surface as a giant chessboard.
 □ □ □ □ □
 ```
 
-Each square (cell) contains information:
+Each square (cell) contains this data:
 
 ```
 Slope
@@ -433,19 +433,19 @@ Cell (1,2)
 Slope = 30°
 ```
 
-Now every location has properties.
+Now each location has properties.
 
 ---
 
 ## Step 2: Assign a Cost
 
-The rover doesn't like:
+The rover must avoid these conditions:
 
 - steep slopes
 - dangerous terrain
-- deep shadows (depending on mission goals)
+- deep shadows (this is a function of the mission objectives)
 
-So give every cell a cost.
+Thus, give each cell a cost.
 
 Example:
 
@@ -464,7 +464,7 @@ Now the map becomes:
 1   1   1   1
 ```
 
-The rover will naturally try to avoid expensive cells.
+The planner selects a path that avoids cells with a high cost.
 
 ---
 
@@ -482,22 +482,20 @@ Ice Deposit
 (40,60)
 ```
 
-Now you need the best route.
+Now find the best route.
 
 ---
 
 ## Step 4: Use A*
 
-For a hackathon, I strongly recommend **A***.
+For a hackathon, we strongly recommend **A***, for these reasons:
 
-Why?
+- It is easy to implement.
+- It is fast.
+- It is well-known.
+- The judges know it.
 
-- Easy to implement
-- Fast
-- Well-known
-- Judges recognize it
-
-Conceptually:
+The concept:
 
 ```
 Current Position
@@ -509,23 +507,23 @@ Estimate distance to goal
 Choose best option
 ```
 
-It finds a path that's usually very close to optimal.
+It usually finds a path that is almost optimal.
 
-Python libraries exist, so you won't need to implement everything from scratch.
+Python libraries are available. Thus, you do not have to implement all of the algorithm yourself.
 
 ---
 
 ## Step 5: Make It Lunar-Specific
 
-This is where your project becomes interesting.
+This step makes the project different from a general planner.
 
-Instead of:
+Do not use:
 
 ```
 Cost = Distance
 ```
 
-use:
+Use:
 
 ```
 Cost =
@@ -550,11 +548,11 @@ cost = (
 
 ---
 
-## Even Better
+## Possible Extension
 
-Suppose your rover wants to visit multiple ice sites.
+The rover can have to go to two or more ice sites.
 
-Now you can use:
+For this case, you can use:
 
 - A* between sites
 - Traveling Salesman heuristics
@@ -562,11 +560,11 @@ Now you can use:
 
 But this is Version 2.
 
-Don't start there.
+Do not start with this version.
 
 ---
 
-## What I'd Build for the Hackathon
+## Recommended Build for the Hackathon
 
 Version 1:
 
@@ -604,7 +602,7 @@ A*
 Smart Cost Function
 ```
 
-and spend the saved time improving your ice-detection and landing-site-selection pipeline. That's where the real novelty of your project lies.
+Use the time that this saves to improve the pipeline for ice detection and landing-site selection. The real novelty of the project is in that pipeline.
 
 ### Documents
 
