@@ -2,35 +2,36 @@
 
 **Hackathon:** ISRO Build-a-thon Hackathon 2026 — Chandrayaan-2 Lunar South Polar Exploration Challenge
 **Team:** <!-- FILL: your team name -->
-**Status:** In progress. The ice-distribution model and A* path planner are implemented; RL, simulation, and OHRC are planned.
+**Status:** In progress. The ice-distribution model and the A* path planner are implemented. RL, simulation, and OHRC are planned.
 
-Maps subsurface lunar ice using Chandrayaan-2 DFSAR dual-frequency radar polarimetry,
-estimates subsurface ice volume, selects a safe landing site near a doubly shadowed crater
-in the Faustini PSR, and computes an optimal power-constrained rover traverse path.
+This project uses Chandrayaan-2 DFSAR dual-frequency radar polarimetry to map subsurface lunar ice. It does these tasks:
+
+- It estimates the volume of the subsurface ice.
+- It selects a safe landing site near a doubly shadowed crater in the Faustini PSR.
+- It calculates an optimal rover traverse path within the power limits.
 
 ---
 
 ## Problem Statement
 
-The lunar South Pole hosts **doubly shadowed craters** — craters within permanently shadowed
-regions (PSRs) — where temperatures drop to −230 °C and water ice may have accumulated over
-billions of years. Identifying these deposits and designing a rover path to access them safely
-is a core challenge for future ISRO lunar missions.
+The lunar South Pole has **doubly shadowed craters**. These are craters in permanently shadowed
+regions (PSRs). In these craters, temperatures decrease to −230 °C, and water ice can have collected over
+billions of years. Future ISRO lunar missions must find these deposits and design a safe rover path to them.
 
 This project addresses all five objectives in the problem statement:
 
-1. Maps subsurface ice using dual-frequency (L/S-band) DFSAR polarimetric depth discrimination
-2. Builds a fused terrain + ice probability map from DEM, OHRC, radar, and thermal inputs
-3. Estimates subsurface ice volume within the top ~5 m of regolith using a dielectric mixing model
-4. Computes a safe, energy-efficient rover traverse using A* with a PPO reinforcement learning agent
-5. Simulates the Rover ↔ OLTS ↔ Orbiter communication and power chain for waypoint validation
+1. Map the subsurface ice with dual-frequency (L/S-band) DFSAR polarimetric depth discrimination.
+2. Make a fused map of terrain + ice probability from DEM, OHRC, radar, and thermal inputs.
+3. Estimate the subsurface ice volume in the top ~5 m of regolith with a dielectric mixing model.
+4. Calculate a safe, energy-efficient rover traverse with A* and a PPO reinforcement learning agent.
+5. Simulate the Rover ↔ OLTS ↔ Orbiter communication and power chain to validate the waypoints.
 
 ---
 
 ## System Architecture
 
 
-Two primary input streams merge at a Fusion Layer, then drive ice estimation, cost mapping, and path planning in sequence.
+Two primary input streams merge at a Fusion Layer. The output of this layer then drives ice estimation, cost mapping, and path planning, in that sequence.
 
 ![Process Flow Diagram](Final_presentation/process_flow.png)
 
@@ -61,7 +62,7 @@ ISRO-BAH-26/
 └── outputs/                  # Model outputs (git-ignored)
 ```
 
-Large data (`*.npy`, `*.tif`, `outputs/`, `data/`) is not committed; regenerate with the commands below.
+The repository does not contain large data (`*.npy`, `*.tif`, `outputs/`, `data/`). To make the data again, use the commands below.
 
 ---
 
@@ -78,24 +79,31 @@ Large data (`*.npy`, `*.tif`, `outputs/`, `data/`) is not committed; regenerate 
 | L/S depth signal significant | No → Diviner depth-to-stability used |
 
 **Comparison with the previous heuristic model** (fixed weights, CPR > 1 threshold, no thermal gate):
-- The old model assigned P > 0.5 to ~3600 km²; 61% of that was in terrain with Tmax > 150 K, where ice cannot survive.
-- The new model puts 0% of its P > 0.5 area in warm terrain.
+- The old model gave P > 0.5 to ~3600 km². Of that area, 61% was in terrain with Tmax > 150 K, where ice cannot survive.
+- The new model has 0% of its P > 0.5 area in warm terrain.
 
 ![Ice probability evidence layers](results/ice_probability.png)
 
 ![DFSAR L/S depth classes](results/ice_depth.png)
 
-Full numbers: [`results/ice_volume_estimate.json`](results/ice_volume_estimate.json).
+All values: [`results/ice_volume_estimate.json`](results/ice_volume_estimate.json).
 
-Ablation: PSR is the dominant term. Removing it cuts the high-probability area from 579 to 78 km². Mini-RF CPR adds about 30% to that area, and LAMP adds a little.
+Ablation: PSR is the dominant term. If you remove it, the high-probability area decreases from 579 to 78 km². Mini-RF CPR adds about 30% to that area. LAMP adds a small quantity.
 
 ---
 
 ## Documentation
 
-Browse everything at **[avinashistoocool.github.io/ISRO-BAH-26](https://avinashistoocool.github.io/ISRO-BAH-26/)**.
+All documents are available at **[avinashistoocool.github.io/ISRO-BAH-26](https://avinashistoocool.github.io/ISRO-BAH-26/)**.
 
-- [**Technical report (PDF)**](docs/ISRO-BAH-26_Technical_Report.pdf): the architecture and all of the mathematics used in the code, including the polar stereographic grid, terrain roughness, compact/full-pol CPR and DOP, the roughness-corrected radar anomaly, thermal-stability gate, log-odds evidence fusion with Monte-Carlo weights, the L/S depth-to-ice inversion and enrichment test, the volume integral, the slope cost map and the A* planner, plus results and limitations. The LaTeX source is in [`docs/ISRO-BAH-26_Technical_Report.tex`](docs/ISRO-BAH-26_Technical_Report.tex).
+- [**Technical report (PDF)**](docs/ISRO-BAH-26_Technical_Report.pdf): the architecture and all of the mathematics in the code. The report also gives the results and limitations. It includes these topics:
+  - the polar stereographic grid and terrain roughness;
+  - compact/full-pol CPR and DOP, and the roughness-corrected radar anomaly;
+  - the thermal-stability gate, and log-odds evidence fusion with Monte-Carlo weights;
+  - the L/S depth-to-ice inversion and the enrichment test;
+  - the volume integral, the slope cost map and the A* planner.
+
+  The LaTeX source is in [`docs/ISRO-BAH-26_Technical_Report.tex`](docs/ISRO-BAH-26_Technical_Report.tex).
 - [**Pitch deck (PDF)**](Final_presentation/Final_ISRO_pitch.pdf): the hackathon presentation.
 
 ---
@@ -149,7 +157,7 @@ python src/metrics.py --path outputs/rover_path.geojson
 | LRO LROC NAC | NASA PDS | Surface texture cross-validation |
 | ShadowCam (KPLO) | NASA/KARI | PSR floor imaging |
 
-> Download instructions for public datasets: see `data/README.md`
+> For the download instructions of the public datasets, refer to `data/README.md`.
 
 ---
 
@@ -158,7 +166,7 @@ python src/metrics.py --path outputs/rover_path.geojson
 ### 1. Data Loading and DEM Preprocessing
 
 All datasets are reprojected to **Lunar South Polar Stereographic** and co-registered spatially.
-Terrain derivatives and PSR boundaries are computed from the LOLA DEM.
+The terrain derivatives and PSR boundaries come from the LOLA DEM.
 
 ```python
 import richdem as rd
@@ -173,9 +181,9 @@ roughness = rd.TerrainAttribute(dem, attrib='roughness')
 
 ### 2. CPR / DOP Analysis — Dual Frequency
 
-Radar polarimetric parameters are computed **separately for L-band and S-band** from DFSAR
-Stokes matrix data. This is the core scientific innovation: L-band penetrates ~3 m depth;
-S-band penetrates shallower (~0.5–1 m). Agreement or disagreement between bands encodes
+The radar polarimetric parameters are calculated **separately for L-band and S-band** from the DFSAR
+Stokes matrix data. This is the primary scientific innovation. L-band penetrates to a depth of ~3 m.
+S-band penetrates less deeply (~0.5–1 m). The agreement or disagreement between the bands shows
 where in the subsurface column the ice is concentrated.
 
 **Circular Polarization Ratio (CPR) per band:**
@@ -188,25 +196,25 @@ CPR = σ_same-sense / σ_opposite-sense
 DOP = sqrt(Q² + U² + V²) / I
 ```
 
-**Per-band ice masks** (thresholds per ISRO BAH'26 problem statement):
+**Per-band ice masks** (thresholds from the ISRO BAH'26 problem statement):
 ```python
 ice_mask_L = (cpr_L > 1.0) & (dop_L < 0.13)   # L-band: deeper signal (~3 m)
 ice_mask_S = (cpr_S > 1.0) & (dop_S < 0.13)   # S-band: shallower signal (~1 m)
 ```
 
-**Why dual-band discriminates better than single-band CPR alone:**
-Surface roughness and rocky/blocky terrain can produce elevated CPR at both bands
-simultaneously. Subsurface ice concentrated at depth elevates CPR in L-band but
-not S-band (which cannot reach it), producing a frequency-dependent signature that
-surface roughness does not replicate. DOP < 0.13 further discriminates volume
+**Why dual-band discrimination is better than single-band CPR:**
+Surface roughness and rocky/blocky terrain can increase CPR at the two bands
+at the same time. Subsurface ice at depth increases CPR in L-band, but
+not in S-band, because S-band cannot get to that depth. The result is a frequency-dependent signature that
+surface roughness does not make. DOP < 0.13 also helps to discriminate volume
 scattering (ice) from surface scattering (rocks).
 
 ---
 
 ### 3. Fusion Layer
 
-Three information streams are merged into a single fused raster used by all downstream
-modules:
+The fusion layer merges three information streams into a single fused raster. All downstream
+modules use this raster:
 
 ```python
 fused = {
@@ -224,7 +232,7 @@ fused = {
 
 #### 4a. Dual-Band Depth Classification
 
-L/S-band agreement classifies each pixel into a depth regime:
+The L/S-band agreement puts each pixel into a depth regime:
 
 ```python
 near_surface = ice_mask_L & ice_mask_S      # ice within S-band reach (~0–1 m)
@@ -234,7 +242,7 @@ no_detection = ~ice_mask_L                  # no ice signal in either band
 
 #### 4b. Dielectric Mixing Model
 
-A two-component Maxwell-Garnett mixing model converts per-pixel permittivity to ice
+A two-component Maxwell-Garnett mixing model changes the permittivity of each pixel into the ice
 volume fraction:
 
 ```
@@ -244,11 +252,11 @@ volume fraction:
 Where:
 - `ε_dry_regolith` ≈ 2.7 (lunar regolith baseline)
 - `ε_ice` ≈ 3.1 (water ice at radar frequencies)
-- `f_ice` = ice volume fraction (solved per pixel)
+- `f_ice` = ice volume fraction (solved for each pixel)
 
-Temperature from LRO Diviner provides a cross-check: ice is only thermally stable at
-temperatures below ~110 K, constraining the expected detection zone to pixels where
-Diviner confirms sufficiently cold conditions.
+The temperature from LRO Diviner gives a cross-check. Ice is thermally stable only at
+temperatures below ~110 K. Thus, the expected detection zone is limited to pixels where
+Diviner shows sufficiently cold conditions.
 
 #### 4c. Volume Integration
 
@@ -258,16 +266,16 @@ vol_deep = deep_only.sum()    * pixel_area_m2 * (l_band_depth_m - s_band_depth_m
 total_volume_m3 = vol_near + vol_deep
 ```
 
-> **Caveat:** L-band DFSAR penetration depth is ~3 m. The problem statement specifies
-> top-5 m integration; the 3–5 m portion is extrapolated beyond direct radar sensing depth
-> and is flagged as such in results.
+> **CAUTION:** Do not use the 3–5 m volume as a direct radar measurement. The L-band DFSAR penetration depth is ~3 m.
+> The problem statement specifies integration over the top 5 m. Thus, the 3–5 m part is extrapolated beyond the direct radar sensing depth.
+> The results identify this part as extrapolated.
 
 ---
 
 ### 5. Cost Map
 
-Fusion layer outputs, ice probability raster, OHRC hazard layer, and PSR masks are combined
-into a single traversability cost array stored as `.npy`:
+The outputs of the fusion layer, the ice probability raster, the OHRC hazard layer, and the PSR masks are combined
+into a single traversability cost array. The array is stored as `.npy`:
 
 ```python
 cost = (w1 * slope_cost
@@ -296,17 +304,17 @@ Rover physical constraints (`config/constraints.json`):
 }
 ```
 
-> `psr_rim_distance_constraint_km` is set to **3 km** (not 5 km) to remain within the
-> 2–4 km battery range with margin. At 0.1 km/h over 10 operational hours/day the rover
-> covers ~1 km/day net traverse (accounting for stops and thermal rest periods).
+> `psr_rim_distance_constraint_km` is set to **3 km** (not 5 km). Thus, the value stays in the
+> 2–4 km battery range with a margin. At 0.1 km/h for 10 operational hours/day, the rover
+> moves a net traverse of ~1 km/day (this includes stops and thermal rest periods).
 
 ---
 
 ### 6. Path Planning
 
-The cost map drives an **A\* planner combined with a PPO reinforcement learning agent**.
-A\* provides the structured grid search; the PPO agent optimises waypoint selection and
-charging-stop placement under battery and illumination constraints.
+The cost map drives an **A\* planner together with a PPO reinforcement learning agent**.
+A\* does the structured grid search. The PPO agent optimises the selection of waypoints and
+the positions of the charging stops within the battery and illumination limits.
 
 ```python
 # A* grid search over cost map
@@ -318,23 +326,26 @@ path_astar = astar(cost_map, start=landing_site, goal=target_crater)
 # Reward: +ice_zones_visited − slope_penalty − energy_consumed − shadow_time
 ```
 
-The **Target Planner** sequences multi-waypoint objectives: solar charging stops on
-illuminated ridges, intermediate high-confidence ice zones, and the final crater target.
+The **Target Planner** puts the waypoint objectives in sequence:
 
-**Landing site selection is an output of path planning**, not a prior step. The planner
-identifies the optimal start node that minimises total path cost to the target crater,
-subject to terrain safety constraints. This guarantees the selected landing site is always
-reachable within one battery charge.
+1. Solar charging stops on illuminated ridges.
+2. Intermediate ice zones with high confidence.
+3. The final crater target.
+
+**The landing site selection is an output of the path planning**, not a step before it. The planner
+finds the optimal start node that gives the minimum total path cost to the target crater,
+within the terrain safety limits. This makes sure that the rover can always get from the selected landing site
+to the target with one battery charge.
 
 #### Cost Weight Sensitivity Analysis
 
-Two weight configurations were tested to validate robustness:
+We tested two weight configurations to validate the stability of the result:
 
 | Config | w1 slope | w4 ice | Effect |
 | --- | --- | --- | --- |
-| Safety-first | 0.60 | 0.05 | Path avoids steeper terrain, longer route |
-| Science-first | 0.15 | 0.50 | Path maximises ice zone coverage, accepts mild slopes |
-| **Default** | **0.30** | **0.15** | **Balanced — used for final output** |
+| Safety-first | 0.60 | 0.05 | The path avoids steeper terrain; the route is longer |
+| Science-first | 0.15 | 0.50 | The path gives maximum ice zone coverage and accepts mild slopes |
+| **Default** | **0.30** | **0.15** | **Balanced — used for the final output** |
 
 <!-- FILL: add one sentence describing which configuration produced a meaningfully different path, once sensitivity runs are complete -->
 
@@ -349,29 +360,28 @@ and power chain:
 Rover (position, battery%) ──► OLTS ──► Orbiter (LOS window, pass timing)
 ```
 
-Output flags any waypoint where orbiter LOS and battery level simultaneously fall below
-threshold, indicating a comms/power risk that requires a path adjustment or charging stop.
+The output identifies each waypoint where the orbiter LOS and the battery level are both below the
+threshold at the same time. This shows a comms/power risk, and the path must change or the rover must stop to charge.
 
 ---
 
 ### 8. Limitations and Future Work
 
-- **L-band penetration depth (~3 m)** is less than the 5 m integration scope required by
-  the problem statement. The 3–5 m portion of the volume estimate is extrapolated, not
-  directly sensed, and carries higher uncertainty.
-- **PPO agent training** was initiated during the hackathon. Converged reward curve and
-  trained policy are shown in `notebooks/06_path_planning.ipynb`. Full integration with
-  real-time terrain feedback is deferred post-hackathon.
-- **OLTS power budget** (orbital laser power transfer) was scoped as a future extension
-  and is not included in the primary pipeline. Preliminary analysis shows that at 50 W
-  transmitter power and orbital range, delivered energy is too small to be mission-relevant
-  at current parameters; higher transmitter power is required for viability.
+- **The L-band penetration depth (~3 m)** is less than the 5 m integration scope that
+  the problem statement requires. The 3–5 m part of the volume estimate is extrapolated, not
+  directly sensed, and it has a higher uncertainty.
+- **PPO agent training** started during the hackathon. `notebooks/06_path_planning.ipynb` shows the converged reward curve and the
+  trained policy. The full integration with real-time terrain feedback is postponed until after the hackathon.
+- **OLTS power budget** (orbital laser power transfer) is a possible future extension.
+  It is not in the primary pipeline. A preliminary analysis shows that, at 50 W of
+  transmitter power and orbital range, the delivered energy is too small to be important for the mission
+  with the current parameters. A higher transmitter power is necessary to make it viable.
 
 ---
 
 ## Key Results
 
-> Results will be populated as pipeline runs complete. Placeholders marked `[ ]` below.
+> The results will be added when the pipeline runs are complete. The placeholders below are marked `[ ]`.
 
 | Metric | Value | Notes |
 | --- | --- | --- |      
@@ -406,7 +416,7 @@ threshold, indicating a comms/power risk that requires a path adjustment or char
 
 ## Simulation Waypoint Table
 
-> Populated by `simulation.py` — fill in after running.
+> `simulation.py` adds the values. Fill in the table after you run it.
 
 | Waypoint | Type | Battery % | Orbiter LOS | Comms Window | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -416,7 +426,7 @@ threshold, indicating a comms/power risk that requires a path adjustment or char
 | WP-04 | PSR rim crossing | <!-- FILL --> | <!-- FILL --> | <!-- FILL --> | <!-- FILL --> |
 | WP-05 | Target crater floor | <!-- FILL --> | <!-- FILL --> | <!-- FILL --> | <!-- FILL --> |
 
-> Add or remove rows to match actual waypoint count from `rover_path.geojson`.
+> Add or remove rows so that the number of rows is the same as the number of waypoints in `rover_path.geojson`.
 
 ---
 
@@ -494,13 +504,13 @@ defusedxml
 
 ## Citing
 
-If you use this work, please cite it using the metadata in [`CITATION.cff`](CITATION.cff) (GitHub shows a "Cite this repository" button). Zenodo metadata is in [`.zenodo.json`](.zenodo.json).
+If you use this work, please cite it with the metadata in [`CITATION.cff`](CITATION.cff) (GitHub shows a "Cite this repository" button). The Zenodo metadata is in [`.zenodo.json`](.zenodo.json).
 
 ---
 
 ## License
 
-MIT License — see `LICENSE` for details.
+MIT License — refer to `LICENSE` for details.
 
 ---
 
